@@ -6,7 +6,7 @@
 #    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 14:34:40 by andcarva          #+#    #+#              #
-#    Updated: 2025/02/17 19:25:35 by andcarva         ###   ########.fr        #
+#    Updated: 2025/03/10 17:43:22 by andcarva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ GET_NEXT_LINE_OBJ= $(addprefix $(OBJ_DIR)/, $(notdir $(GET_NEXT_LINE_SRC:.c=.o))
 all: $(NAME)
  
 $(NAME): $(OBJ) $(OBJ_LIST) $(PRINTF_OBJ) $(GET_NEXT_LINE_OBJ)
-	echo "Creating library $(NAME)"
+	# echo "Creating library $(NAME)"
 	@ar rcs $@ $^
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
