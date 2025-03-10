@@ -6,7 +6,7 @@
 #    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 15:43:01 by andcarva          #+#    #+#              #
-#    Updated: 2025/03/10 15:50:34 by andcarva         ###   ########.fr        #
+#    Updated: 2025/03/10 16:56:19 by andcarva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,17 +15,17 @@ CC=cc
 CFLAGS= -Wall -Wextra -Werror -g
 OBJ_DIR= Obj_pipex
 SRC_DIR= Src
-LIBFT = Includes/Libft/libft.ad
+LIBFT = Includes/Libft/libft.a
 
-SRC_FILES= 
+SRC_FILES= pipex.c
 
-OBJ= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=o))
+OBJ= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 SRC= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 all: $(NAME)
 
 $(OBJ_DIR):
-	@mkdir -p (OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
