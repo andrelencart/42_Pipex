@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+Includes/.vscode/
+Includes/LICENSE
+Includes/README.md
+Includes/libft.pdf
+minilibx-linux/
