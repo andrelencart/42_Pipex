@@ -6,7 +6,7 @@
 #    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 14:34:40 by andcarva          #+#    #+#              #
-#    Updated: 2025/03/10 17:43:22 by andcarva         ###   ########.fr        #
+#    Updated: 2025/03/11 15:59:06 by andcarva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,11 +59,9 @@ bonus: $(OBJ_LIST) $(NAME)
 	@ar rcs $(NAME) $(OBJ_LIST)
 
 clean:
-	echo "Removing $(OBJ_DIR)"
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	echo "Removing $(NAME)"
 	@rm -f $(NAME)
 
 re: fclean all
