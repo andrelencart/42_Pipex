@@ -6,26 +6,24 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:51:57 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/12 16:04:50 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:01:40 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
-	int	fd[2];
-	int	pid;
+	t_pipex	pipex;
 
-	if (pipe(fd) == -1)
-		ft_error_file(fd);
-	pid = fork();
-	if (pid < 0)
+	if (pipe(pipex.fd) == -1)
+		ft_error_file(pipex.fd);
+	pipex.pid = fork();
+	if (pipex.pid < 0)
 		perror("Error");
-	if (pid == 0)
-		child_process();
+	if (pipex.pid == 0)
+		child_process(pipex.fd);
 	else
-		parent_process();
-	printf("\n");
+		parent_process(pipex.fd);
 	return(0);
 }
