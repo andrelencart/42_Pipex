@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 16:51:57 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/12 16:04:50 by andcarva         ###   ########.fr       */
+/*   Created: 2025/03/12 15:53:44 by andcarva          #+#    #+#             */
+/*   Updated: 2025/03/12 16:03:01 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-int	main(int ac, char **av)
-{
-	int	fd[2];
-	int	pid;
+// void	ft_error_env(int pid)
+// {
+// 	if (pid < 0)
+// }
 
-	if (pipe(fd) == -1)
-		ft_error_file(fd);
-	pid = fork();
-	if (pid < 0)
+void	ft_error_file(int fd)
+{
+	if (fd < 0)
+	{
+		close(fd);
 		perror("Error");
-	if (pid == 0)
-		child_process();
-	else
-		parent_process();
-	printf("\n");
-	return(0);
+		exit(1);
+	}
 }
