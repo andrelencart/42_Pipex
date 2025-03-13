@@ -6,13 +6,13 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:07:09 by andcarva          #+#    #+#             */
-/*   Updated: 2025/02/17 15:09:38 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:37:04 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	free_split(char **split)
+void	free_split(char **split)
 {
 	size_t	i;
 

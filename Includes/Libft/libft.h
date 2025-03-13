@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:49:25 by andcarva          #+#    #+#             */
-/*   Updated: 2025/02/17 16:35:01 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:37:16 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+void	free_split(char **split);
 int		ft_atoi(const char *str);
 void	ft_bzero(void *ptr, size_t size);
 void	*ft_calloc(size_t num, size_t size);

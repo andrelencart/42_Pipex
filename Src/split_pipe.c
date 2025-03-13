@@ -6,24 +6,11 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:51:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/13 16:43:14 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:36:48 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
-
-static void	free_split(char **split)
-{
-	size_t	i;
-
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
-}
 
 static int	count_str(char const *s, char c)
 {
@@ -51,55 +38,78 @@ static int	count_str(char const *s, char c)
 	return (count);
 }
 
-static char	*get_word(char const *s, char c)
+static	void working_quote(char const **s, int *len, char c)
 {
-	size_t	len;
+	while (*s[*len] != '\0')
+	{
+		printf("A");
+		if (*s[*len] == '\'')
+		{
+			printf("B ");
+			len++;
+			s++;
+			while (*s[*len] != '\'')
+			{
+				printf("C ");
+				len++;
+				s++;
+			}
+			s++;
+			len++;
+		}
+		else if (*s[*len] == c)
+			break;
+		else
+		{
+			s++;
+			len++;
+		}
+	}
+}
+
+static char	*get_word(char const *s, char c, int *len)
+{
 	char	*new_word;
 	size_t	i;
 
 	len = 0;
-	while (s[len] != '\0' && s[len] != c)
-		len++;
-	new_word = (char *)malloc(sizeof(char) * (len + 1));
+	working_quote(&s, len, c);
+	len++;
+	new_word = malloc(sizeof(char) * (*len + 1));
+	printf("len: %zu\n", len);
 	if (!new_word)
 	{
 		free_split(&new_word);
 		return (NULL);
 	}
 	i = 0;
-	while (i < len)
-	{
-		new_word[i] = s[i];
-		i++;
-	}
-	new_word[len] = '\0';
+	ft_strlcpy(new_word, s, len);
+	new_word[*len] = '\0';
+	printf("new_word:%s\n", new_word);
 	return (new_word);
-}
-
-static void	working_quote(char *s, int *len)
-{
-	
 }
 
 char	**ft_split_pipe(char const *s, char c)
 {
 	char	**split;
 	size_t	i;
+	int len;
 
 	i = 0;
 	split = malloc(sizeof(char *) * (count_str(s, c) + 1));
 	if (!split)
 		return (NULL);
+	printf("count: %d\n", count_str(s, c));
 	while (s && *s != '\0' && *s != '\n')
 	{
 		if (*s != c)
 		{
-			split[i] = get_word(s, c);
+			len = 0;
+			split[i] = get_word(s, c, &len);
 			if (!split[i])
 				return (free_split(split), NULL);
 			i++;
-			while (*s && *s != c)
-				s++;
+			working_quote(&s, &len, c);
 		}
 		else   
 			s++;
@@ -112,7 +122,12 @@ int main(void)
 {
 	char *s = "   Hello  'World How' Are We Doing 'AAAA AAAA' !     . ";
 	char **split;
+	int i;
 
 	split = ft_split_pipe(s, ' ');
-	// printf("")
+	while (split[i])
+	{
+		printf("word:%s\n", split[i]);
+		i++;
+	}
 }
