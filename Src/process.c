@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:03 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/13 14:27:40 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:50:07 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 void	child_process(char **av, char **env, int *fd)
 {
-	int infile;
-	
+	int 	infile;
+	char	**cmds;
+	char	*path;
 	infile = open("Includes/infile.txt", O_RDWR, 0777);
 	if (infile == -1)
 		ft_error_file(&infile);
 	dup2(fd[1], STDOUT_FILENO);
 	dup2(infile, STDIN_FILENO);
 	close(fd[1]);
+	cmds = get_cmds(av[2]);
+	path = get_paths()
 	execve(, av, );
 }
 

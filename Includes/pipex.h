@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:47:11 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/13 14:38:24 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:53:54 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	child_process(char **av, char **env, int *fd);
 void	parent_process(char **av, char **env, int *fd);
 
 // GET FUNC
-char	**get_cmds(char **av);
+char	**get_cmds(char *av);
+
+// UTILS FUNC
+char	**ft_split_pipe(char const *s, char c);
 
 #endif //PIPEX_H
