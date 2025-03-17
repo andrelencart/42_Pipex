@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:51:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/13 17:36:48 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:05:53 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,61 +31,59 @@ static int	count_str(char const *s, char c)
 				s++;
 		}
 		else if (*s)
+		{
 			count++;
-		while (*s && *s != c)
-			s++;
+			while (*s && *s != c && *s != '\'') 
+				s++;
+		}
 	}
 	return (count);
 }
 
-static	void working_quote(char const **s, int *len, char c)
+static void	working_quote(char const *s, int *len, char c)
 {
-	while (*s[*len] != '\0')
+	
+	*len = 0;
+	while (s[*len])
 	{
-		printf("A");
-		if (*s[*len] == '\'')
+		while (s[*len] && s[*len] == c)
+			(*len)++;
+		if (s[*len] && s[*len] == '\'')
 		{
-			printf("B ");
-			len++;
-			s++;
-			while (*s[*len] != '\'')
-			{
-				printf("C ");
-				len++;
-				s++;
-			}
-			s++;
-			len++;
+			(*len)++;
+			while (s[*len] && s[*len] != '\'')
+				(*len)++;
+			if (s[*len] == '\'')
+				(*len)++;
 		}
-		else if (*s[*len] == c)
-			break;
 		else
 		{
-			s++;
-			len++;
+			while (s[*len] && s[*len] != c)
+				(*len)++;	
 		}
+		break;
 	}
 }
 
-static char	*get_word(char const *s, char c, int *len)
+static char	*get_word(char const *s, char c)
 {
 	char	*new_word;
-	size_t	i;
+	int		i;
+	int 	len;
 
 	len = 0;
-	working_quote(&s, len, c);
-	len++;
-	new_word = malloc(sizeof(char) * (*len + 1));
-	printf("len: %zu\n", len);
-	if (!new_word)
+	working_quote(s, &len, c);
+	if (s[0] == '\'')
 	{
-		free_split(&new_word);
-		return (NULL);
+		s++;
+		len -= 2;
 	}
+	new_word = malloc(sizeof(char) * (len + 1));
+	if (!new_word)
+		return (NULL);
 	i = 0;
-	ft_strlcpy(new_word, s, len);
-	new_word[*len] = '\0';
-	printf("new_word:%s\n", new_word);
+	ft_strlcpy(new_word, s, len + 1);
+	new_word[len] = '\0';
 	return (new_word);
 }
 
@@ -93,41 +91,42 @@ char	**ft_split_pipe(char const *s, char c)
 {
 	char	**split;
 	size_t	i;
-	int len;
+	int		len;
 
 	i = 0;
 	split = malloc(sizeof(char *) * (count_str(s, c) + 1));
 	if (!split)
 		return (NULL);
 	printf("count: %d\n", count_str(s, c));
-	while (s && *s != '\0' && *s != '\n')
+	while (s && *s != '\0')
 	{
-		if (*s != c)
+		while (*s && *s == c)
+			s++;
+		if (*s)
 		{
-			len = 0;
-			split[i] = get_word(s, c, &len);
+			working_quote(s, &len, c);
+			split[i] = get_word(s, c);
 			if (!split[i])
 				return (free_split(split), NULL);
 			i++;
-			working_quote(&s, &len, c);
-		}
-		else   
-			s++;
+			s += len;
+		}   
 	}
 	split[i] = NULL;
 	return (split);
 }
 
-int main(void)
-{
-	char *s = "   Hello  'World How' Are We Doing 'AAAA AAAA' !     . ";
-	char **split;
-	int i;
+// int main(void)
+// {
+// 	char *s = "   Hello  'World How' Are We Doing 'AAAA AAAA' !     . ";
+// 	char **split;
+// 	int i = 0;
 
-	split = ft_split_pipe(s, ' ');
-	while (split[i])
-	{
-		printf("word:%s\n", split[i]);
-		i++;
-	}
-}
+// 	split = ft_split_pipe(s, ' ');
+// 	while (split[i])
+// 	{
+// 		printf("word: %s\n", split[i]);
+// 		i++;
+// 	}
+// 	free_split(split);
+// }

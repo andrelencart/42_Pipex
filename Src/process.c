@@ -6,39 +6,37 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:03 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/13 14:50:07 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:42:28 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/pipex.h"
 
-void	child_process(char **av, char **env, int *fd)
+void	write_to_pipe(char **env, t_pipex *pipex)
 {
-	int 	infile;
-	char	**cmds;
-	char	*path;
-	infile = open("Includes/infile.txt", O_RDWR, 0777);
-	if (infile == -1)
-		ft_error_file(&infile);
-	dup2(fd[1], STDOUT_FILENO);
-	dup2(infile, STDIN_FILENO);
-	close(fd[1]);
-	cmds = get_cmds(av[2]);
-	path = get_paths()
-	execve(, av, );
+	close(pipex->fd[0]);
+	pipex->infile = open("Includes/infile.txt", O_RDWR, 0644);
+	if (pipex->infile == -1)
+		ft_error_file(pipex->infile);
+	dup2(pipex->fd[1], STDOUT_FILENO);
+	dup2(pipex->infile, STDIN_FILENO);
+	close(pipex->fd[1]);
+	if (execve(pipex->path, pipex->cmds, env) == -1)
+		ft_error("Error\n");
 }
 
-// void	parent_process(int *fd)
-// {
-	
-// }
+void	parent_process(char **env, t_pipex *pipex)
+{
+	pipex->outfile = open("Includes/outfile.txt", O_RDWR, 0644);
+	if (pipex->outfile == -1)
+		ft_error_file(pipex->outfile);
+	dup2(pipex->fd[0], STDOUT_FILENO);
+	dup2(pipex->outfile, STDIN_FILENO);
+	close(pipex->fd[0]);
+}
 
-
-	// (void)fd;
-	// printf("The original fd: %d\n", file_d);
-	// if (file_d < 0)
-	// 	printf("FUNCK\n");
-	// dup2(file_d, STDOUT_FILENO);
-	// ft_printf("The duplicate fd: %d\n", file_d);
-	// ft_printf("Done\n");
-	// close(file_d);
+void	pipex_to_stdin(t_pipex *pipex)
+{
+	dup2(pipex->fd[1], STDIN_FILENO);
+	close(pipex->fd[1]);
+}

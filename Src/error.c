@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_error.c                                      :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:53:44 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/12 16:58:36 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:18:33 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,22 @@
 // 	if (pid < 0)
 // }
 
-void	ft_error_file(int *fd)
+void	ft_error_file(t_pipex *pipex)
 {
-	if (fd < 0)
+	int	i;
+	
+	i = 0;
+	if (pipex->fd[i] < 0)
 	{
-		close(fd[1]);
-		close(fd[0]);
+		close(pipex->fd[1]);
+		close(pipex->fd[0]);
 		perror("Error");
 		exit(1);
 	}
+}
+
+void	ft_error(char *s)
+{
+	perror(s);
+	exit(1);
 }
