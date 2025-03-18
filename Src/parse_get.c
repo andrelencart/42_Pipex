@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:28:09 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/18 18:22:34 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/18 19:26:57 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**get_cmds(char **av)
 	char	**cmds;
 	int		i; 
 	
-	i = 0;
+	i = 1;
 	while (av[i])
 	{
 		cmds = ft_split_pipe(av[i], ' ');
