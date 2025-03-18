@@ -6,7 +6,7 @@
 #    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 15:43:01 by andcarva          #+#    #+#              #
-#    Updated: 2025/03/17 13:06:10 by andcarva         ###   ########.fr        #
+#    Updated: 2025/03/18 18:09:20 by andcarva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ OBJ_DIR= Obj_pipex
 SRC_DIR= Src
 LIBFT = Includes/Libft/libft.a
 
-SRC_FILES= pipex.c error.c process.c split_pipe.c
- 
+SRC_FILES= pipex.c error.c process.c split_pipe.c parse_get.c
+# SRC_FILES = parse_get.c split_pipe.c
 OBJ= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 SRC= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

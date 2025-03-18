@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get.c                                              :+:      :+:    :+:   */
+/*   parse_get.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:28:09 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/17 18:42:22 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:22:34 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ char	**get_cmds(char **av)
 	char	**cmds;
 	int		i; 
 	
+	i = 0;
 	while (av[i])
 	{
-		cmds = ft_split(av, ' ');
+		cmds = ft_split_pipe(av[i], ' ');
 		if (!cmds)
 		{
 			free_split(cmds);
-			ft_error("Error Split Commands!\n");
+			ft_error("Error");
 		}
 		i++;
 	}
@@ -44,7 +45,7 @@ char	*get_path(char *cmds, char **env)
 	i = 0;
 	while (path[i])
 	{
-		bar = ft_strjoin(path[i], '/');
+		bar = ft_strjoin(path[i], "/");
 		final_line = ft_strjoin(bar, cmds);
 		if (access(final_line, F_OK) == 0)
 			return (final_line);
@@ -55,3 +56,15 @@ char	*get_path(char *cmds, char **env)
 	free_split(path);
 	return (NULL);
 }
+
+// int	main(int ac, char	**av, char	**env)
+// {
+// 	char *path;
+// 	char **cmds;
+	
+// 	(void)ac;
+// 	cmds = get_cmds(av);
+// 	path = get_path(cmds[0], env);
+
+// 	printf("Path: %s\n", path);
+// }

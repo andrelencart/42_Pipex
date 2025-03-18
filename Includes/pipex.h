@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:47:11 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/17 18:40:23 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:39:16 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,27 @@ typedef struct s_pipex
 	int		pid2;
 	int 	fd[2];
 	char	**cmds;
-	char	**path;
+	char	*path;
 	int		infile;
 	int		outfile;
+	int		exit_code;
 	
 }			t_pipex;
 
-
-//PARSE FUNC
-// void	check_args(int ac, char **av, char **env);
-
-// ERROR FUNC
-void	ft_error_file(t_pipex *pipex);
-void	ft_error(char *s);
-
 // PROCESS FUNC
 void	write_to_pipe(char **env, t_pipex *pipex);
-void	parent_process(char **env, t_pipex *pipex);
-void	pipex_to_stdin(t_pipex *piex);
+void	the_pipe(char **env, t_pipex *pipex);
 
 // GET FUNC
 char	**get_cmds(char **av);
 char	*get_path(char *cmds, char **env);
 
+// ERROR FUNC
+void	ft_error_file(t_pipex *pipex, char *s);
+void	ft_error(char *s);
+
 // UTILS FUNC
 char	**ft_split_pipe(char const *s, char c);
+void	master_close(t_pipex *pipex);
 
 #endif //PIPEX_H

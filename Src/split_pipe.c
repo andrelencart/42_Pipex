@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:51:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/17 13:05:53 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:52:00 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ char	**ft_split_pipe(char const *s, char c)
 	split = malloc(sizeof(char *) * (count_str(s, c) + 1));
 	if (!split)
 		return (NULL);
-	printf("count: %d\n", count_str(s, c));
 	while (s && *s != '\0')
 	{
 		while (*s && *s == c)
@@ -115,18 +114,3 @@ char	**ft_split_pipe(char const *s, char c)
 	split[i] = NULL;
 	return (split);
 }
-
-// int main(void)
-// {
-// 	char *s = "   Hello  'World How' Are We Doing 'AAAA AAAA' !     . ";
-// 	char **split;
-// 	int i = 0;
-
-// 	split = ft_split_pipe(s, ' ');
-// 	while (split[i])
-// 	{
-// 		printf("word: %s\n", split[i]);
-// 		i++;
-// 	}
-// 	free_split(split);
-// }

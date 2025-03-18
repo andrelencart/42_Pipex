@@ -1,2 +1,0 @@
-The duplicate fd: 5
-Done
