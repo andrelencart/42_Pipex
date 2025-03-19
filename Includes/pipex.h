@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:47:11 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/18 19:30:58 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:51:29 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	write_to_pipe(char **av, char **env, t_pipex *pipex);
 void	the_pipe(char **av, char **env, t_pipex *pipex);
 
 // GET FUNC
-char	**get_cmds(char **av);
+// char	**get_cmds(char **av);
 char	*get_path(char *cmds, char **env);
 
 // ERROR FUNC
@@ -51,6 +51,6 @@ void	ft_error(char *s);
 
 // UTILS FUNC
 char	**ft_split_pipe(char const *s, char c);
-void	master_close(t_pipex *pipex);
+void	master_close();
 
 #endif //PIPEX_H

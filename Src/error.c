@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:53:44 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/18 18:20:12 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:57:54 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	ft_error_file(t_pipex *pipex, char *s)
 {
-		master_close(pipex);
 		perror(s);
+		master_close();
+		free(pipex->path);
+		free_split(pipex->cmds);
 		exit(1);
 }
 
@@ -25,14 +27,14 @@ void	ft_error(char *s)
 	exit(1);
 }
 
-void	master_close(t_pipex *pipex)
+void	master_close()
 {
 	int	i;
 
-	i = 0;
-	while (pipex->fd[i])
+	i = 3;
+	while (i < 1024)
 	{
-		close(pipex->fd[i]);
+		close(i);
 		i++;
 	}
 }
