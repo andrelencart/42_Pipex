@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:53:44 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/19 15:57:54 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:30:23 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_error_file(t_pipex *pipex, char *s)
 {
 		perror(s);
 		master_close();
-		free(pipex->path);
 		free_split(pipex->cmds);
+		free(pipex->path);
 		exit(1);
 }
 

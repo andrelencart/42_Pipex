@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:03 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/19 16:21:12 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/19 16:48:03 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	write_to_pipe(char **av, char **env, t_pipex *pipex)
 {
 	close(pipex->fd[0]);
 	pipex->cmds = ft_split_pipe(av[2], ' ');
-	if (!pipex->cmds)
+	if (!pipex->cmds || !pipex->cmds[0])
 		ft_error_file(pipex ,"Error Cmds In");
 	pipex->path = get_path(pipex->cmds[0], env);
 	if (!pipex->path)
@@ -37,7 +37,7 @@ void	the_pipe(char **av, char **env, t_pipex *pipex)
 {
 	close(pipex->fd[1]);
 	pipex->cmds = ft_split_pipe(av[3], ' ');
-	if (!pipex->cmds)
+	if (!pipex->cmds || !pipex->cmds[0])
 		ft_error_file(pipex ,"Error Cmds Out");
 	pipex->path = get_path(pipex->cmds[0], env);
 	if (!pipex->path)
@@ -62,8 +62,10 @@ char	*get_path(char *cmds, char **env)
 	int		i;
 	
 	i = 0;
-	while (ft_strncmp(env[i], "PATH", 4) != 0)
+	while (env[i] && ft_strncmp(env[i], "PATH", 4) != 0)
 		i++;
+	if (!env)
+		return (NULL);
 	path = ft_split_pipe(env[i] + 5, ':');
 	if (!path)
 		ft_error("Error");

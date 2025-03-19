@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:47:11 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/19 15:51:29 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:36:35 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void	ft_error(char *s);
 // UTILS FUNC
 char	**ft_split_pipe(char const *s, char c);
 void	master_close();
+void	pipex_init(t_pipex *pipex);
 
 #endif //PIPEX_H

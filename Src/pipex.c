@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:51:57 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/19 15:53:19 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:42:16 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac, char **av, char **env)
 	
 	if (ac != 5)
 		ft_error("Error 1");
+	ft_bzero((void *)&pipex, sizeof(t_pipex));
 	if(pipe(pipex.fd) == -1)
 		ft_error_file(&pipex, "Error");
 	pipex.pid1 = fork();
