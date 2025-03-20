@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:03 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/20 17:01:05 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/20 18:58:51 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,5 @@ char	*get_path(char *cmds, char **env)
 			return (free_split(path), final_line);
 		free(final_line);
 	}
-	return (free_split(path), NULL);
+	return (free_split(path), ft_strdup(cmds));
 }
