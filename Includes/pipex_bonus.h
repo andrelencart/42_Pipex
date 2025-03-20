@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 15:53:44 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/19 17:30:23 by andcarva         ###   ########.fr       */
+/*   Created: 2025/03/20 15:57:04 by andcarva          #+#    #+#             */
+/*   Updated: 2025/03/20 17:29:55 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
+
 #include "../Includes/pipex.h"
 
-void	ft_error_file(t_pipex *pipex, char *s)
-{
-		perror(s);
-		master_close();
-		free_split(pipex->cmds);
-		free(pipex->path);
-		exit(1);
-}
+// typedef struct s_pipex
+// {
+// 	int		*pid;
+// 	int 	fd[2];
+// 	char	**cmds;
+// 	char	*path;
+// 	int		infile;
+// 	int		outfile;
+// 	int		exit_code;
+	
+// }			t_pipex;
 
-void	ft_error(char *s)
-{
-	perror(s);
-	exit(1);
-}
-
-void	master_close()
-{
-	int	i;
-
-	i = 3;
-	while (i < 1024)
-	{
-		close(i);
-		i++;
-	}
-}
+#endif //PIPEX_BONUS_H

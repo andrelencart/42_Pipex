@@ -6,11 +6,11 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:51:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/18 17:52:00 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:12:59 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "../../Includes/pipex.h"
 
 static int	count_str(char const *s, char c)
 {

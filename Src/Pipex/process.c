@@ -6,11 +6,11 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:03 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/19 17:54:23 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:01:05 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "../../Includes/pipex.h"
 
 void	write_to_pipe(char **av, char **env, t_pipex *pipex)
 {
@@ -64,22 +64,22 @@ char	*get_path(char *cmds, char **env)
 	i = 0;
 	while (env[i] && ft_strncmp(env[i], "PATH", 4) != 0)
 		i++;
-	if (!env)
+	if (!env[i])
 		return (NULL);
 	path = ft_split_pipe(env[i] + 5, ':');
 	if (!path)
 		ft_error("Error");
 	i = 0;
-	while (path[i])
+	while (path[i++])
 	{
 		bar = ft_strjoin(path[i], "/");
 		final_line = ft_strjoin(bar, cmds);
 		free(bar);
+		if (!final_line)
+			break;
 		if (access(final_line, F_OK) == 0)
 			return (free_split(path), final_line);
 		free(final_line);
-		i++;
 	}
-	free_split(path);
-	return (NULL);
+	return (free_split(path), NULL);
 }

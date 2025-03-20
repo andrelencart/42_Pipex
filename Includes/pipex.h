@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:47:11 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/19 17:36:35 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:48:49 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@
 
 typedef struct s_pipex
 {
-	int		pid1;
-	int		pid2;
+	int		*pid;
 	int 	fd[2];
 	char	**cmds;
 	char	*path;
@@ -42,7 +41,6 @@ void	write_to_pipe(char **av, char **env, t_pipex *pipex);
 void	the_pipe(char **av, char **env, t_pipex *pipex);
 
 // GET FUNC
-// char	**get_cmds(char **av);
 char	*get_path(char *cmds, char **env);
 
 // ERROR FUNC
@@ -52,6 +50,6 @@ void	ft_error(char *s);
 // UTILS FUNC
 char	**ft_split_pipe(char const *s, char c);
 void	master_close();
-void	pipex_init(t_pipex *pipex);
+void	alloc_pid(int size, t_pipex *pipex);
 
 #endif //PIPEX_H
