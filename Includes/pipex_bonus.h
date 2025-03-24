@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:57:04 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/20 17:29:55 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:29:34 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@
 // 	int		exit_code;
 	
 // }			t_pipex;
+
+// PARSE
+void	is_here_doc(t_pipex *pipex_b);
 
 #endif //PIPEX_BONUS_H

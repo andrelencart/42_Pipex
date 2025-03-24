@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/24 16:30:06 by andcarva         ###   ########.fr       */
+/*   Created: 2025/03/24 16:04:32 by andcarva          #+#    #+#             */
+/*   Updated: 2025/03/24 16:26:44 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "../../Includes/pipex_bonus.h"
 
-void	is_here_doc(t_pipex *pipex_b)
+void	llloooop(t_pipex *pipex)
 {
-	if(pipe(pipex_b->fd) == -1)
-		ft_error_file(&pipex_b, "Error");
-	while (1)
-	{
-		
-	}
+	
 }

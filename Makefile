@@ -6,7 +6,7 @@
 #    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 15:43:01 by andcarva          #+#    #+#              #
-#    Updated: 2025/03/20 16:38:31 by andcarva         ###   ########.fr        #
+#    Updated: 2025/03/24 16:15:10 by andcarva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,14 @@ BONUS_DIR= Src/Pipex_bonus
 LIBFT = Includes/Libft/libft.a
 
 SRC_FILES= pipex.c error.c process.c split_pipe.c
-BONUS_FILES= pipex_bonus.c
+BONUS_FILES= pipex_bonus.c loop.c here_doc.c
 
 OBJ= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 OBJ_BONUS= $(addprefix $(OBJ_DIR)/, $(BONUS_FILES:.c=.o))
 SRC_BONUS = $(addprefix $(BONUS_DIR)/, $(BONUS_FILES))
 SRC= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
-all: $(NAME)
+all: $(NAME) 
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
