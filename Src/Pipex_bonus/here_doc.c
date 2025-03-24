@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/24 17:57:35 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/24 18:12:43 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	is_here_doc(t_pipex *pipex_b)
 		ft_error_file(&pipex_b, "Error");
 	while (1)
 	{
-		aaaaa
+		Github not green;
 	}
 }
