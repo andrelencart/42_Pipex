@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/25 12:33:52 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:44:35 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	is_here_doc(char **av)
 	while(1)
 	{
 		cancer_line = get_next_line(0);
-		if (ft_strncmp(av[2], cancer_line, ft_strlen(av[2])))
+		ft_putstr_fd(cancer_line, herefd);
+		if (ft_strncmp(av[2], cancer_line, ft_strlen(av[2])) == 0)
 			break ;
-		ft_putendl_fd(cancer_line, herefd);
 	}
+	unlink("here_doc");
+	master_close();
 }
