@@ -6,13 +6,13 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:04:32 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/24 16:26:44 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:33:10 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/pipex_bonus.h"
 
-void	llloooop(t_pipex *pipex)
-{
+// void	llloooop(t_pipex *pipex)
+// {
 	
-}
+// }

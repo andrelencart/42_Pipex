@@ -6,13 +6,13 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/24 18:49:13 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:33:52 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "../../Includes/pipex_bonus.h"
 
-void	is_here_doc(t_pipex *pipex_b, char **av)
+void	is_here_doc(char **av)
 {
 	char	*cancer_line;
 	int		herefd;

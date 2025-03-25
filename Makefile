@@ -6,49 +6,54 @@
 #    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 15:43:01 by andcarva          #+#    #+#              #
-#    Updated: 2025/03/24 16:15:10 by andcarva         ###   ########.fr        #
+#    Updated: 2025/03/25 12:59:14 by andcarva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=pipex
 CC=cc
 CFLAGS= -Wall -Wextra -Werror -g
-OBJ_DIR= Obj_pipex
-SRC_DIR= Src/Pipex
-BONUS_DIR= Src/Pipex_bonus
 LIBFT = Includes/Libft/libft.a
 
-SRC_FILES= pipex.c error.c process.c split_pipe.c
-BONUS_FILES= pipex_bonus.c loop.c here_doc.c
+MAIN= pipex.c
+SRC_FILES= error.c process.c split_pipe.c
+SRC_BONUS_FILES= pipex_bonus.c loop.c here_doc.c
 
-OBJ= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
-OBJ_BONUS= $(addprefix $(OBJ_DIR)/, $(BONUS_FILES:.c=.o))
-SRC_BONUS = $(addprefix $(BONUS_DIR)/, $(BONUS_FILES))
+SRC_DIR= Src/Pipex
 SRC= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+SRC_MAIN= $(addprefix $(SRC_DIR)/, $(MAIN))
 
-all: $(NAME) 
+OBJ_DIR= Obj_pipex
+OBJ= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+OBJ_MAIN= $(addprefix $(OBJ_DIR)/, $(MAIN:.c=.o))
+
+SRC_BONUS_DIR= Src/Pipex_bonus
+SRC_BONUS = $(addprefix $(BONUS_DIR)/, $(SRC_BONUS_FILES))
+OBJ_BONUS= $(addprefix $(OBJ_DIR)/, $(SRC_BONUS_FILES:.c=.o))
+
+all: $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-$(NAME): $(OBJ) $(LIBFT) $(OBJ_BONUS)
+$(NAME): $(OBJ) $(LIBFT) $(OBJ_MAIN)
 	@echo "\e[1;91mCOMPILING PIPEX ..."
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ_MAIN) $(OBJ) $(LIBFT) -o $(NAME)
 	@echo "\e[1;91mDONE!!"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(BONUS_DIR)/%.c | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
-
 $(LIBFT):
 	@make -C ./Includes/Libft -s
 
-bonus: $(SRC_BONUS) $(NAME)
+bonus: $(OBJ_BONUS) $(NAME) $(OBJ)
 	@echo "\e[1;95mCOMPILING BONUS ..."
-	@$(CC) $(CFLAGS) $(OBJ_BONUS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(OBJ_BONUS) $(LIBFT) -o $(NAME)
 	@echo "\e[1;95mDONE!!"
+
+$(OBJ_DIR)/%.o: $(SRC_BONUS_DIR)/%.c | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "\e[1;33mClEANING PIPE ..."
@@ -62,4 +67,4 @@ fclean: clean
 	
 re: fclean all
 
-.PHONY: all fclean clean re
+.PHONY: all fclean clean re bonus
