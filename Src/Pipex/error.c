@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:53:44 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/20 16:51:28 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:10:20 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	alloc_pid(int size, t_pipex *pipex)
 {
 	pipex->pid = ft_calloc(size, sizeof(int));
 	if (!pipex->pid)
-		ft_error("Error Pid");
+		ft_error("Error Pid Alloc");
 }

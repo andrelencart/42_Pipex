@@ -6,7 +6,7 @@
 #    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 15:43:01 by andcarva          #+#    #+#              #
-#    Updated: 2025/03/25 12:59:14 by andcarva         ###   ########.fr        #
+#    Updated: 2025/03/25 17:19:34 by andcarva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT = Includes/Libft/libft.a
 
 MAIN= pipex.c
 SRC_FILES= error.c process.c split_pipe.c
-SRC_BONUS_FILES= pipex_bonus.c loop.c here_doc.c
+SRC_BONUS_FILES= pipex_bonus.c process_bonus.c here_doc.c
 
 SRC_DIR= Src/Pipex
 SRC= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
