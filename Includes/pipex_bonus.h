@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:57:04 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/27 18:11:56 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/27 19:17:02 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef struct s_pipex_b
 {
 	int		*pid;
-	int		**fd;
+	int		fd[2];
 	char	**cmds;
 	char	*path;
 	char	**env;
@@ -33,14 +33,16 @@ typedef struct s_pipex_b
 
 	// HERE_DOC
 void	is_here_doc(t_pipex_b *pipex_b, char **av);
-void	loop_here_doc(t_pipex_b *pipex_b, char **av);
 void	write_to_pipe_hdfd(char **av, t_pipex_b *pipex_b, int n);
+void	if_here_doc(t_pipex_b *pipex_b, char **av, int flag, int n);
 
 	// NORMAL
-void	the_pipe_bonus(char **av, t_pipex_b *pipex_b, int n, int fdn);
-void	final_pipe(char **av, t_pipex_b *pipex_b, int n, int fdn);
-void	create_pipe(char **av, t_pipex_b *pipex_b, int i);
+void	the_pipe_bonus(char **av, t_pipex_b *pipex_b, int n);
+void	the_output(char **av, t_pipex_b *pipex_b, int n);
 void	alloc_pid_bonus(int size, t_pipex_b *pipex_b);
+void	loop_pipes(t_pipex_b *pipex_b, char **av, int flag);
+void	write_to_pipe_bonus(char **av, t_pipex_b *pipex_b, int n);
+// void	create_pipe(char **av, t_pipex_b *pipex_b, int i);
 
 // ERROR
 void	ft_error_file_bonus(t_pipex_b *pipex_b, char *s);
