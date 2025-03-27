@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:51:57 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/20 17:28:18 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:04:03 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	main(int ac, char **av, char **env)
 	t_pipex	pipex;
 	
 	if (ac != 5)
-		ft_error("Error 1");
+		ft_error("Error Args");
 	ft_bzero((void *)&pipex, sizeof(t_pipex));
 	alloc_pid(ac - 3, &pipex);
 	if(pipe(pipex.fd) == -1)
-		ft_error_file(&pipex, "Error");
+		ft_error_file(&pipex, "Error Pipe");
 	pipex.pid[0] = fork();
 	if (pipex.pid[0] < 0)
 		ft_error("Error 3");
@@ -33,10 +33,8 @@ int	main(int ac, char **av, char **env)
 	if (pipex.pid[1] == 0)
 		the_pipe(av, env, &pipex);
 	master_close();
-	waitpid(pipex.pid[0], NULL, 0);
-	waitpid(pipex.pid[1], &pipex.exit_code, 0);
-	free(pipex.pid);
-	if (WIFEXITED(pipex.exit_code))
-		WEXITSTATUS(pipex.exit_code);
-	return(pipex.exit_code);
+	wait_pid(&pipex);
+	if (WIFEXITED(pipex.status))
+		return(free(pipex.pid), WEXITSTATUS(pipex.status));
+	return(free(pipex.pid), pipex.status);
 }

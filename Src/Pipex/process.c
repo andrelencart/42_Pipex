@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:03 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/20 18:58:51 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:00:35 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	write_to_pipe(char **av, char **env, t_pipex *pipex)
 	pipex->cmds = ft_split_pipe(av[2], ' ');
 	if (!pipex->cmds || !pipex->cmds[0])
 		ft_error_file(pipex ,"Error Cmds In");
-	pipex->path = get_path(pipex->cmds[0], env);
+	pipex->path = get_path(pipex->cmds[0], env, 0);
 	if (!pipex->path)
 		ft_error_file(pipex, "Error Path In");
 	printf("Command[0]: %s\n", pipex->cmds[0]);
@@ -30,7 +30,7 @@ void	write_to_pipe(char **av, char **env, t_pipex *pipex)
 	dup2(pipex->infile, STDIN_FILENO);
 	master_close();
 	if (execve(pipex->path, pipex->cmds, env) == -1)
-		ft_error_file(pipex ,"Error Exec In");
+		ft_error_execve(pipex ,"Error Exec In");
 }
 
 void	the_pipe(char **av, char **env, t_pipex *pipex)
@@ -39,7 +39,7 @@ void	the_pipe(char **av, char **env, t_pipex *pipex)
 	pipex->cmds = ft_split_pipe(av[3], ' ');
 	if (!pipex->cmds || !pipex->cmds[0])
 		ft_error_file(pipex ,"Error Cmds Out");
-	pipex->path = get_path(pipex->cmds[0], env);
+	pipex->path = get_path(pipex->cmds[0], env, 0);
 	if (!pipex->path)
 		ft_error_file(pipex, "Error Path Out");
 	printf("Command[1]: %s\n", pipex->cmds[0]);
@@ -51,21 +51,19 @@ void	the_pipe(char **av, char **env, t_pipex *pipex)
 	dup2(pipex->outfile, STDOUT_FILENO);
 	master_close();
 	if (execve(pipex->path, pipex->cmds, env) == -1)
-		ft_error_file(pipex ,"Error Exec Out");
+		ft_error_execve(pipex ,"Error Exec Out");
 }
 
-char	*get_path(char *cmds, char **env)
+char	*get_path(char *cmds, char **env, int i)
 {
 	char	**path;
 	char 	*final_line;
 	char	*bar;
-	int		i;
 	
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH", 4) != 0)
-		i++;
-	if (!env[i])
+	if (env_check(cmds, env, i) == 0)
 		return (NULL);
+	else if (env_check(cmds, env, i) == 1)
+		return (cmds);
 	path = ft_split_pipe(env[i] + 5, ':');
 	if (!path)
 		ft_error("Error");
@@ -76,10 +74,30 @@ char	*get_path(char *cmds, char **env)
 		final_line = ft_strjoin(bar, cmds);
 		free(bar);
 		if (!final_line)
-			break;
+			break ;
 		if (access(final_line, F_OK) == 0)
 			return (free_split(path), final_line);
 		free(final_line);
 	}
 	return (free_split(path), ft_strdup(cmds));
+}
+
+void	alloc_pid(int size, t_pipex *pipex)
+{
+	pipex->pid = ft_calloc(size, sizeof(int));
+	if (!pipex->pid)
+		ft_error("Error Pid Alloc");
+}
+
+int	env_check(char *cmds, char **env, int i)
+{
+	if (!env)
+		return (0);
+	while (env[i] && ft_strncmp(env[i], "PATH=", 5) != 0)
+		i++;
+	if (!env[i] && access(cmds, F_OK))
+		return (0);
+	else if (!access(cmds, F_OK))
+		return (1);
+	return (2);
 }

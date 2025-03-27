@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/25 17:23:05 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:09:37 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	is_here_doc(t_pipex_b *pipex_b, char **av)
 
 	pipex_b->hdfd = open("here_doc", O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (pipex_b->hdfd == -1)
-		ft_error_file(pipex_b, "Error Heredoc");
+		ft_error_file_bonus(pipex_b, "Error Heredoc");
 	while(1)
 	{
 		ft_putstr_fd(">", 1);
@@ -38,23 +38,23 @@ void	is_here_doc(t_pipex_b *pipex_b, char **av)
 void	loop_here_doc(t_pipex_b *pipex_b, char **av)
 {
 	int	i;
-	int	cmdn;
+	int	n;
 	
 	i = 0;
-	cmdn = 3;
-	pipex_b->hdfd = open("here_doc", O_RDWR | O_TRUNC | O_CREAT, 0644);
-	if (pipex_b->hdfd == -1)
-		ft_error_file(pipex_b, "Error Heredoc");
-	while (pipex_b->pid[i])
+	n = 3;
+	create_pipe(av, pipex_b, i);
+	pipex_b->pid[i] = fork();
+	if (pipex_b->pid[i] < 0)
+			ft_error("Error Pid");
+	if (pipex_b->pid[i] == 0)
+		write_to_pipe_hdfd(av, pipex_b, n++);
+	while (pipex_b->pid[++i])
 	{
-		create_pipe(pipex_b);
 		pipex_b->pid[i] = fork();
 		if (pipex_b->pid[i] < 0)
 			ft_error("Error Pid");
 		if (pipex_b->pid[i] == 0)
-			write_to_pipe_bonus(av, pipex_b, cmdn);
-		i++;
-		cmdn++;
+			the_pipe_bonus(av, pipex_b, n, i);
+		n++;
 	}
 }
-
