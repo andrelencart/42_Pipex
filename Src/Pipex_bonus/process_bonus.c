@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrlencart <andrlencart@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:19:00 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/27 19:16:50 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:08:47 by andrlencart      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 
 void	write_to_pipe_hdfd(char **av, t_pipex_b *pipex_b, int n)
 {
+	printf("HERE_DOC\n");
 	close(pipex_b->fd[0]);
 	pipex_b->cmds = ft_split_pipe(av[n], ' ');
 	if (!pipex_b->cmds || !pipex_b->cmds[0])
@@ -41,7 +42,7 @@ void	write_to_pipe_hdfd(char **av, t_pipex_b *pipex_b, int n)
 		ft_error_file_bonus(pipex_b, "Error Path In");
 	printf("Command[%d]: %s\n", n, pipex_b->cmds[0]);
 	printf("Path[%d]: %s\n", n, pipex_b->path);
-	pipex_b->hdfd = open("here_doc", O_RDWR, 0644);
+	pipex_b->hdfd = open("here_doc", O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (pipex_b->hdfd == -1)
 		ft_error_file_bonus(pipex_b, "Error Heredoc");
 	dup2(pipex_b->fd[1], STDOUT_FILENO);
@@ -53,6 +54,7 @@ void	write_to_pipe_hdfd(char **av, t_pipex_b *pipex_b, int n)
 
 void	write_to_pipe_bonus(char **av, t_pipex_b *pipex_b, int n)
 {
+	printf("NO HERE_DOC\n");
 	close(pipex_b->fd[0]);
 	pipex_b->cmds = ft_split_pipe(av[n], ' ');
 	if (!pipex_b->cmds || !pipex_b->cmds[0])
@@ -74,13 +76,14 @@ void	write_to_pipe_bonus(char **av, t_pipex_b *pipex_b, int n)
 
 void	the_pipe_bonus(char **av, t_pipex_b *pipex_b, int n)
 {
+	printf("PIPE\n");
 	close(pipex_b->fd[0]);
 	pipex_b->cmds = ft_split_pipe(av[n], ' ');
 	if (!pipex_b->cmds || !pipex_b->cmds[0])
-		ft_error_file_bonus(pipex_b ,"Error Cmds Out");
+		ft_error_file_bonus(pipex_b ,"Error Cmds Pipe");
 	pipex_b->path = get_path(pipex_b->cmds[0], pipex_b->env, 0);
 	if (!pipex_b->path)
-		ft_error_file_bonus(pipex_b, "Error Path Out");
+		ft_error_file_bonus(pipex_b, "Error Path Pipe");
 	printf("Command[%d]: %s\n", n, pipex_b->cmds[0]);
 	printf("Path[%d]: %s\n", n, pipex_b->path);
 	dup2(pipex_b->fd[1], STDIN_FILENO);
@@ -91,6 +94,7 @@ void	the_pipe_bonus(char **av, t_pipex_b *pipex_b, int n)
 
 void	the_output(char **av, t_pipex_b *pipex_b, int n)
 {
+	printf("THE_OUTPUT\n");
 	pipex_b->cmds = ft_split_pipe(av[n], ' ');
 	if (!pipex_b->cmds || !pipex_b->cmds[0])
 		ft_error_file_bonus(pipex_b ,"Error Cmds Out");
@@ -105,5 +109,5 @@ void	the_output(char **av, t_pipex_b *pipex_b, int n)
 	dup2(pipex_b->outfile, STDOUT_FILENO);
 	master_close();
 	if (execve(pipex_b->path, pipex_b->cmds, pipex_b->env) == -1)
-		ft_error_file_bonus(pipex_b ,"Error Exec Out");
+		ft_error_execve_bonus(pipex_b ,"Error Exec Out");
 }

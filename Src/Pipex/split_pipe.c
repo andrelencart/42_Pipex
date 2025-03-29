@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrlencart <andrlencart@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:51:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/20 16:12:59 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:55:52 by andrlencart      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	working_quote(char const *s, int *len, char c)
 static char	*get_word(char const *s, char c)
 {
 	char	*new_word;
-	int		i;
+	// int		i;
 	int 	len;
 
 	len = 0;
@@ -81,7 +81,7 @@ static char	*get_word(char const *s, char c)
 	new_word = malloc(sizeof(char) * (len + 1));
 	if (!new_word)
 		return (NULL);
-	i = 0;
+	// i = 0;
 	ft_strlcpy(new_word, s, len + 1);
 	new_word[len] = '\0';
 	return (new_word);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrlencart <andrlencart@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:57:04 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/27 19:17:02 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:49:07 by andrlencart      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_pipex_b
 	int		infile;
 	int		outfile;
 	int		hdfd;
-	int		exit_code;
+	int		status;
 }			t_pipex_b;
 
 // PROCESS
@@ -47,5 +47,8 @@ void	write_to_pipe_bonus(char **av, t_pipex_b *pipex_b, int n);
 // ERROR
 void	ft_error_file_bonus(t_pipex_b *pipex_b, char *s);
 void	ft_error_execve_bonus(t_pipex_b *pipex_b, char *s);
+
+// UTILS
+void	wait_pid_bonus(t_pipex_b *pipex_b);
 
 #endif //PIPEX_BONUS_H

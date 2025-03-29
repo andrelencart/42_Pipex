@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrlencart <andrlencart@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:55:58 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/27 19:04:01 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:51:21 by andrlencart      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,9 @@ int	main(int ac, char **av, char **env)
 		alloc_pid_bonus(ac - 3, &pipex_b);
 		loop_pipes(&pipex_b, av, 0);
 	}
+	master_close();
+	wait_pid_bonus(&pipex_b);
+	if (WIFEXITED(pipex_b.status))
+		return(free(pipex_b.pid), WEXITSTATUS(pipex_b.status));
+	return (free(pipex_b.pid), pipex_b.status);
 }
