@@ -6,7 +6,7 @@
 /*   By: andrlencart <andrlencart@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/29 15:40:01 by andrlencart      ###   ########.fr       */
+/*   Updated: 2025/03/29 15:48:10 by andrlencart      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	is_here_doc(t_pipex_b *pipex_b, char **av)
 	unlink("here_doc");
 }
 
+// needs fixing loop
 void	loop_pipes(t_pipex_b *pipex_b, char **av, int flag)
 {
 	int	i;
