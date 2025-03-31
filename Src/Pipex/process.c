@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:03 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/27 17:00:35 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:32:27 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,27 @@ void	the_pipe(char **av, char **env, t_pipex *pipex)
 		ft_error_execve(pipex ,"Error Exec Out");
 }
 
+char *get_env(char *search, char **env)
+{
+	int i;
+
+	i = 0;
+	if (!env)
+		return(NULL);
+	while (env[i] && ft_strncmp(env[i], search, ft_strlen(search)) != 0)
+		i++;
+	if(env[i])
+		return((env[i] + ft_strlen(search)));
+	return(NULL);
+}
+
 char	*get_path(char *cmds, char **env, int i)
 {
 	char	**path;
 	char 	*final_line;
 	char	*bar;
 	
-	if (env_check(cmds, env, i) == 0)
-		return (NULL);
-	else if (env_check(cmds, env, i) == 1)
-		return (cmds);
-	path = ft_split_pipe(env[i] + 5, ':');
+	path = ft_split_pipe(get_env("PATH=", env), ':');
 	if (!path)
 		ft_error("Error");
 	i = 0;
@@ -87,17 +97,4 @@ void	alloc_pid(int size, t_pipex *pipex)
 	pipex->pid = ft_calloc(size, sizeof(int));
 	if (!pipex->pid)
 		ft_error("Error Pid Alloc");
-}
-
-int	env_check(char *cmds, char **env, int i)
-{
-	if (!env)
-		return (0);
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5) != 0)
-		i++;
-	if (!env[i] && access(cmds, F_OK))
-		return (0);
-	else if (!access(cmds, F_OK))
-		return (1);
-	return (2);
 }

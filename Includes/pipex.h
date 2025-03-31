@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:47:11 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/27 16:54:29 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:29:31 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ char	**ft_split_pipe(char const *s, char c);
 void	master_close();
 void	alloc_pid(int size, t_pipex *pipex);
 void	wait_pid(t_pipex *pipex);
-int		env_check(char *cmds, char **env, int i);
+char	*get_env(char *search, char **env);
 
 #endif //PIPEX_H

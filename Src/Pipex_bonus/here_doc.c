@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrlencart <andrlencart@student.42.fr>    +#+  +:+       +#+        */
+/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/29 15:48:10 by andrlencart      ###   ########.fr       */
+/*   Updated: 2025/03/31 15:40:23 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,28 @@ void	loop_pipes(t_pipex_b *pipex_b, char **av, int flag)
 	n = 3;
 	if (pipe(pipex_b->fd) == -1)
 		ft_error_file_bonus(pipex_b, "Error Pipe");
-	pipex_b->pid[i] = fork();
-	if (pipex_b->pid[i] < 0)
-			ft_error("Error Pid");
+	create_fork(pipex_b, i);
 	if (pipex_b->pid[i] == 0)
 		if_here_doc(pipex_b, av, flag, n++);
-	printf("BEFORE WHILE PID LOOP\n");
-	printf("i:%d\n", i);
-	while (pipex_b->pid[++i])
+	while (pipex_b->cmdn - 2 > 0)
 	{
-		printf("WHILE PID LOOP\n");
+		i++;
 		if (pipe(pipex_b->fd) == -1)
 			ft_error_file_bonus(pipex_b, "Error Pipe");
-		pipex_b->pid[i] = fork();
-		if (pipex_b->pid[i] < 0)
-			ft_error("Error Pid");
+		create_fork(pipex_b, i);
 		if (pipex_b->pid[i] == 0)
-			the_pipe_bonus(av, pipex_b, n);
+			the_pipe_bonus(av, pipex_b, n, i);
 		n++;
+		pipex_b->cmdn--;
 	}
-	the_output(av, pipex_b, n);
+	create_fork(pipex_b, i);
+	if (pipex_b->pid[i] == 0)
+		the_output(av, pipex_b, n, i);
+}
+
+void	create_fork(t_pipex_b *pipex_b, int i)
+{
+	pipex_b->pid[i] = fork();
+	if (pipex_b->pid[i] < 0)
+		ft_error("Error Pid");
 }
