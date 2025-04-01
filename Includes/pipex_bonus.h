@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:57:04 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/31 15:39:46 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:44:26 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,13 @@ typedef struct s_pipex_b
 
 	// HERE_DOC
 void	is_here_doc(t_pipex_b *pipex_b, char **av);
-void	write_to_pipe_hdfd(char **av, t_pipex_b *pipex_b, int n);
-void	if_here_doc(t_pipex_b *pipex_b, char **av, int flag, int n);
+void	if_here_doc(t_pipex_b *pipex_b, char **av, int ac, int *i);
 
 	// NORMAL
 	// Tirar i dos printf commands
-void	the_pipe_bonus(char **av, t_pipex_b *pipex_b, int n, int i);
-void	the_output(char **av, t_pipex_b *pipex_b, int n, int i);
 void	alloc_pid_bonus(int size, t_pipex_b *pipex_b);
-void	loop_pipes(t_pipex_b *pipex_b, char **av, int flag);
-void	write_to_pipe_bonus(char **av, t_pipex_b *pipex_b, int n);
+void	loop_pipes(t_pipex_b *pipex_b, char **av, int *i);
+void	exec_func(t_pipex_b *pipex_b, char **av, int i);
 
 // ERROR
 void	ft_error_file_bonus(t_pipex_b *pipex_b, char *s);

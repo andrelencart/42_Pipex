@@ -6,7 +6,7 @@
 #    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 15:43:01 by andcarva          #+#    #+#              #
-#    Updated: 2025/03/27 18:13:51 by andcarva         ###   ########.fr        #
+#    Updated: 2025/04/01 16:44:54 by andcarva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT = Includes/Libft/libft.a
 
 MAIN= pipex.c
 SRC_FILES= error.c process.c split_pipe.c
-SRC_BONUS_FILES= pipex_bonus.c process_bonus.c here_doc.c utils.c
+SRC_BONUS_FILES= pipex_bonus.c dif_process_bonus.c utils.c
 
 SRC_DIR= Src/Pipex
 SRC= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
@@ -66,5 +66,7 @@ fclean: clean
 	@rm -rf $(LIBFT)
 	
 re: fclean all
+
+rb: fclean all bonus
 
 .PHONY: all fclean clean re bonus
