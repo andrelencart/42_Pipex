@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:32:05 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/01 16:38:15 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:36:19 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,21 @@ void	ft_error_execve_bonus(t_pipex_b *pipex_b, char *s)
 	}
 }
 
-void	if_here_doc(t_pipex_b *pipex_b, char **av, int ac, int *i)
+void	create_fork(t_pipex_b *pipex_b, int i)
 {
-	pipex_b->outfile = open(av[ac - 1], O_RDWR | O_TRUNC | O_CREAT, 0644);
-	if (pipex_b->outfile == -1)
-		return (free(pipex_b->pid), ft_error("Error Outfile"));
-	
-	if (ft_strncmp(av[1], "here_doc", 9) == 0)
-	{
-		pipex_b->cmdn = ac - 4;
-		is_here_doc(pipex_b, av);
-		*i = 2;
-	}
-	else
-	{
-		pipex_b->cmdn = ac - 3;
-		alloc_pid_bonus(pipex_b->cmdn - 1, pipex_b);
-		pipex_b->infile = open(av[1], O_RDWR, 0644);
-		if (pipex_b->infile == -1)
-			ft_error_file_bonus(pipex_b, "Error infile");
-		*i = 1;
-		printf("not here doc\n");
-	}	
+	pipex_b->pid[i] = fork();
+	if (pipex_b->pid[i] < 0)
+		ft_error("Error Pid");
 }
 
-void	wait_pid_bonus(t_pipex_b *pipex_b)
+void	wait_pid_loop(t_pipex_b *pipex_b, int ac)
 {
-	printf("pid[0]; %d\n", pipex_b->pid[0]);
-	waitpid(pipex_b->pid[0], NULL, 0);
-	waitpid(pipex_b->pid[1], &pipex_b->status, 0);
+	int	i;
+
+	i = 0;
+	while (i < ac - 3)
+	{
+		waitpid(pipex_b->pid[i], &pipex_b->status, 0);
+		i++;
+	}
 }
