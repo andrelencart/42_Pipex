@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:03 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 15:34:52 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:21:43 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,18 @@ void	write_to_pipe(char **av, char **env, t_pipex *pipex)
 	close(pipex->fd[0]);
 	pipex->cmds = ft_split_pipe(av[2], ' ');
 	if (!pipex->cmds || !pipex->cmds[0])
-		ft_error_file(pipex ,"Error Cmds In");
+		ft_error_file(pipex, "Error Get Command");
 	pipex->path = get_path(pipex->cmds[0], env, 0);
 	if (!pipex->path)
-		ft_error_file(pipex, "Error Path In");
-	printf("Command[0]: %s\n", pipex->cmds[0]);
-	printf("Path[0]: %s\n", pipex->path);
+		ft_error_file(pipex, "Error Path Not Found");
 	pipex->infile = open(av[1], O_RDWR, 0644);
 	if (pipex->infile == -1)
-		ft_error_file(pipex, "Error In");
+		ft_error_file(pipex, "Error Open Infile");
 	dup2(pipex->fd[1], STDOUT_FILENO);
 	dup2(pipex->infile, STDIN_FILENO);
 	master_close();
 	if (execve(pipex->path, pipex->cmds, env) == -1)
-		ft_error_execve(pipex ,"Error Exec In");
+		ft_error_execve(pipex, "Error Command Not Found");
 }
 
 void	the_pipe(char **av, char **env, t_pipex *pipex)
@@ -38,42 +36,40 @@ void	the_pipe(char **av, char **env, t_pipex *pipex)
 	close(pipex->fd[1]);
 	pipex->cmds = ft_split_pipe(av[3], ' ');
 	if (!pipex->cmds || !pipex->cmds[0])
-		ft_error_file(pipex ,"Error Cmds Out");
+		ft_error_file(pipex, "Error Get Command");
 	pipex->path = get_path(pipex->cmds[0], env, 0);
 	if (!pipex->path)
-		ft_error_file(pipex, "Error Path Out");
-	printf("Command[1]: %s\n", pipex->cmds[0]);
-	printf("Path[1]: %s\n", pipex->path);
+		ft_error_file(pipex, "Error Path Not Found");
 	pipex->outfile = open(av[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (pipex->outfile == -1)
-		ft_error_file(pipex, "Error Out");
+		ft_error_file(pipex, "Error Outfile");
 	dup2(pipex->fd[0], STDIN_FILENO);
 	dup2(pipex->outfile, STDOUT_FILENO);
 	master_close();
 	if (execve(pipex->path, pipex->cmds, env) == -1)
-		ft_error_execve(pipex ,"Error Exec Out");
+		ft_error_execve(pipex, "Error Command Not Found");
 }
 
-char *get_env(char *search, char **env)
+char	*get_env(char *search, char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!env)
-		return(NULL);
+		return (NULL);
 	while (env[i] && ft_strncmp(env[i], search, ft_strlen(search)) != 0)
 		i++;
-	if(env[i])
-		return((env[i] + ft_strlen(search)));
+	if (env[i])
+		return ((env[i] + ft_strlen(search)));
 	return (NULL);
 }
 
 char	*get_path(char *cmds, char **env, int i)
 {
 	char	**path;
-	char 	*final_line;
+	char	*final_line;
 	char	*bar;
-	
+
 	path = ft_split_pipe(get_env("PATH=", env), ':');
 	if (!path)
 		return (ft_strdup(cmds));

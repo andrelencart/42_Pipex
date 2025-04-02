@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:57:04 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 12:51:15 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:18:52 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	is_here_doc(t_pipex_b *pipex_b, char **av);
 void	if_here_doc(t_pipex_b *pipex_b, char **av, int ac, int *i);
 
 // PROCESS
-	// tirar printf commands
 void	alloc_pid_bonus(int size, t_pipex_b *pipex_b);
 void	loop_pipes(t_pipex_b *pipex_b, char **av, int *i);
 void	exec_func(t_pipex_b *pipex_b, char **av, int i);

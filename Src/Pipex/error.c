@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrlencart <andrlencart@student.42.fr>    +#+  +:+       +#+        */
+/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:53:44 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/29 14:47:51 by andrlencart      ###   ########.fr       */
+/*   Updated: 2025/04/02 17:14:54 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_error_file(t_pipex *pipex, char *s)
 {
-		perror(s);
-		master_close();
-		free_split(pipex->cmds);
-		free(pipex->path);
-		free(pipex->pid);
-		exit(1);
+	perror(s);
+	master_close();
+	free_split(pipex->cmds);
+	free(pipex->path);
+	free(pipex->pid);
+	exit(1);
 }
 
 void	ft_error(char *s)
@@ -48,14 +48,14 @@ void	ft_error_execve(t_pipex *pipex, char *s)
 		exit(126);
 	}
 }
-	
+
 void	wait_pid(t_pipex *pipex)
 {
 	waitpid(pipex->pid[0], NULL, 0);
 	waitpid(pipex->pid[1], &pipex->status, 0);
 }
 
-void	master_close()
+void	master_close(void)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:52:57 by andcarva          #+#    #+#             */
-/*   Updated: 2025/02/17 16:53:08 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:07:55 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-
-// int main(void)
-// {
-//     int fd = open("text.txt", O_RDONLY);
-//     char *line;
-// 	int		i = 0;
-	
-//     if (fd == -1)
-//     {
-//         printf("Error opening file");
-//         return 1;
-// 	}
-//     while (i < 5)
-//     {
-// 		line = get_next_line(fd);
-// 		if (line != NULL)
-// 		{
-//     	    printf("line: %s", line);
-//     		free(line);
-// 		}
-// 		i++;
-//     }
-//     close(fd);
-//     return 0;
-// }

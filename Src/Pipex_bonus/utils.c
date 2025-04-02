@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:32:05 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 15:55:09 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:19:48 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	alloc_pid_bonus(int size, t_pipex_b *pipex_b)
 
 void	ft_error_file_bonus(t_pipex_b *pipex_b, char *s)
 {
-		perror(s);
-		master_close();
-		free_split(pipex_b->cmds);
-		free(pipex_b->path);
-		free(pipex_b->pid);
-		exit(1);
+	perror(s);
+	master_close();
+	free_split(pipex_b->cmds);
+	free(pipex_b->path);
+	free(pipex_b->pid);
+	exit(1);
 }
 
 void	ft_error_execve_bonus(t_pipex_b *pipex_b, char *s)
@@ -64,7 +64,7 @@ void	wait_pid_loop(t_pipex_b *pipex_b, int ac)
 
 	(void)ac;
 	i = 0;
-	while (i <  pipex_b->cmdn)
+	while (i < pipex_b->cmdn)
 	{
 		waitpid(pipex_b->pid[i], &pipex_b->status, 0);
 		i++;

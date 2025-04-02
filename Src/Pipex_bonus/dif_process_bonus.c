@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 15:54:08 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:22:50 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	is_here_doc(t_pipex_b *pipex_b, char **av)
 	pipex_b->hdfd = open("here_doc", O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (pipex_b->hdfd == -1)
 		ft_error_file_bonus(pipex_b, "Error Heredoc");
-	while(1)
+	while (1)
 	{
 		ft_putstr_fd("> ", 1);
 		cancer_line = get_next_line(0);
@@ -69,7 +69,7 @@ void	if_here_doc(t_pipex_b *pipex_b, char **av, int ac, int *i)
 void	loop_pipes(t_pipex_b *pipex_b, char **av, int *i)
 {
 	static int	j;
-	
+
 	if (pipe(pipex_b->fd) == -1)
 		ft_error_file_bonus(pipex_b, "Error Pipe");
 	create_fork(pipex_b, j);
@@ -95,27 +95,20 @@ void	exec_func(t_pipex_b *pipex_b, char **av, int i)
 {
 	pipex_b->cmds = ft_split_pipe(av[i], ' ');
 	if (!pipex_b->cmds || !pipex_b->cmds[0])
-		ft_error_file_bonus(pipex_b ,"Error Cmds In");
-	dprintf(2 , "command: %s\n", pipex_b->cmds[0]);
+		ft_error_file_bonus(pipex_b, "Error Get Command");
 	pipex_b->path = get_path(pipex_b->cmds[0], pipex_b->env, 0);
 	if (!pipex_b->path)
-		ft_error_file_bonus(pipex_b, "Error Path In");
-	dprintf(2, "Command: %s\n", pipex_b->cmds[0]);
-	dprintf(2, "Path: %s\n", pipex_b->path);
+		ft_error_file_bonus(pipex_b, "Error Path Not Found");
 	master_close();
 	if (execve(pipex_b->path, pipex_b->cmds, pipex_b->env) == -1)
-		ft_error_execve_bonus(pipex_b ,"Error Exec In");
+		ft_error_execve_bonus(pipex_b, "Error Command Not Found");
 }
 
 void	the_output(t_pipex_b *pipex_b, char **av, int i)
 {
 	int	last_pid;
-	
+
 	last_pid = fork();
-	// if (last_pid == -1)
-	// {
-	// 	ft_error_file_bonus(pipex_b, "Error Last_PID");
-	// }
 	if (last_pid == 0)
 	{
 		dup2(pipex_b->outfile, STDOUT_FILENO);

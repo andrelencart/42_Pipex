@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:47:11 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/31 15:29:31 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:06:48 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@
 typedef struct s_pipex
 {
 	int		*pid;
-	int 	fd[2];
+	int		fd[2];
 	char	**cmds;
 	char	*path;
 	int		infile;
 	int		outfile;
 	int		status;
-	
 }			t_pipex;
 
 // PROCESS FUNC
@@ -50,7 +49,7 @@ void	ft_error_execve(t_pipex *pipex, char *s);
 
 // UTILS FUNC
 char	**ft_split_pipe(char const *s, char c);
-void	master_close();
+void	master_close(void);
 void	alloc_pid(int size, t_pipex *pipex);
 void	wait_pid(t_pipex *pipex);
 char	*get_env(char *search, char **env);

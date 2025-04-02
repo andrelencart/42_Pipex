@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:51:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 15:34:20 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:16:57 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	count_str(char const *s, char c)
 {
 	size_t	count;
-	
+
 	count = 0;
 	while (*s)
 	{
@@ -33,7 +33,7 @@ static int	count_str(char const *s, char c)
 		else if (*s)
 		{
 			count++;
-			while (*s && *s != c && *s != '\'') 
+			while (*s && *s != c && *s != '\'')
 				s++;
 		}
 	}
@@ -42,7 +42,6 @@ static int	count_str(char const *s, char c)
 
 static void	working_quote(char const *s, int *len, char c)
 {
-	
 	*len = 0;
 	while (s[*len])
 	{
@@ -59,17 +58,16 @@ static void	working_quote(char const *s, int *len, char c)
 		else
 		{
 			while (s[*len] && s[*len] != c)
-				(*len)++;	
+				(*len)++;
 		}
-		break;
+		break ;
 	}
 }
 
 static char	*get_word(char const *s, char c)
 {
 	char	*new_word;
-	// int		i;
-	int 	len;
+	int		len;
 
 	len = 0;
 	working_quote(s, &len, c);
@@ -81,7 +79,6 @@ static char	*get_word(char const *s, char c)
 	new_word = malloc(sizeof(char) * (len + 1));
 	if (!new_word)
 		return (NULL);
-	// i = 0;
 	ft_strlcpy(new_word, s, len + 1);
 	new_word[len] = '\0';
 	return (new_word);
@@ -110,7 +107,7 @@ char	**ft_split_pipe(char const *s, char c)
 			if (!split[i++])
 				return (free_split(split), NULL);
 			s += len;
-		}  
+		}
 	}
 	split[i] = NULL;
 	return (split);
