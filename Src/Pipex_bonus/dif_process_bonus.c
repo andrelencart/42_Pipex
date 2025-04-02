@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/01 19:08:02 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:54:08 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	if_here_doc(t_pipex_b *pipex_b, char **av, int ac, int *i)
 {
 	if (ft_strncmp(av[1], "here_doc", 9) == 0)
 	{
-		pipex_b->outfile = open(av[ac - 1], O_RDWR | O_TRUNC | O_CREAT, 0644);
+		pipex_b->outfile = open(av[ac - 1], O_RDWR | O_APPEND | O_CREAT, 0644);
 		if (pipex_b->outfile == -1)
 			return (ft_error("Error Outfile"));
 		pipex_b->cmdn = ac - 4;
@@ -93,7 +93,6 @@ void	loop_pipes(t_pipex_b *pipex_b, char **av, int *i)
 
 void	exec_func(t_pipex_b *pipex_b, char **av, int i)
 {
-	dprintf(2, "loop, i: %d\n", i);
 	pipex_b->cmds = ft_split_pipe(av[i], ' ');
 	if (!pipex_b->cmds || !pipex_b->cmds[0])
 		ft_error_file_bonus(pipex_b ,"Error Cmds In");
@@ -102,6 +101,7 @@ void	exec_func(t_pipex_b *pipex_b, char **av, int i)
 		ft_error_file_bonus(pipex_b, "Error Path In");
 	dprintf(2, "Command: %s\n", pipex_b->cmds[0]);
 	dprintf(2, "Path: %s\n", pipex_b->path);
+	master_close();
 	if (execve(pipex_b->path, pipex_b->cmds, pipex_b->env) == -1)
 		ft_error_execve_bonus(pipex_b ,"Error Exec In");
 }

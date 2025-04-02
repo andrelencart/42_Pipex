@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:03 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/31 15:32:27 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:49:13 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char *get_env(char *search, char **env)
 		i++;
 	if(env[i])
 		return((env[i] + ft_strlen(search)));
-	return(NULL);
+	return("/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin");
 }
 
 char	*get_path(char *cmds, char **env, int i)

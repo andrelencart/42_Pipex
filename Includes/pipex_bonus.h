@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:57:04 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/01 17:39:28 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:51:15 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_pipex_b
 	int		status;
 }			t_pipex_b;
 
-	// HERE_DOC
+// HERE_DOC
 void	is_here_doc(t_pipex_b *pipex_b, char **av);
 void	if_here_doc(t_pipex_b *pipex_b, char **av, int ac, int *i);
 
