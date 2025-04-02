@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:57:04 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 17:18:52 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:34:57 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_error_file_bonus(t_pipex_b *pipex_b, char *s);
 void	ft_error_execve_bonus(t_pipex_b *pipex_b, char *s);
 
 // UTILS
-void	wait_pid_loop(t_pipex_b *pipex_b, int ac);
+void	wait_pid_loop(t_pipex_b *pipex_b);
 void	create_fork(t_pipex_b *pipex_b, int i);
 
 #endif //PIPEX_BONUS_H

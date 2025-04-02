@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:55:58 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 17:18:22 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:42:15 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av, char **env)
 		loop_pipes(&pipex_b, av, &i);
 	the_output(&pipex_b, av, i);
 	master_close();
-	wait_pid_loop(&pipex_b, ac);
+	wait_pid_loop(&pipex_b);
 	unlink("here_doc");
 	if (WIFEXITED(pipex_b.status))
 		return (free(pipex_b.pid), WEXITSTATUS(pipex_b.status));

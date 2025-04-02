@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 17:22:50 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:23:14 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	if_here_doc(t_pipex_b *pipex_b, char **av, int ac, int *i)
 		pipex_b->cmdn = ac - 3;
 		alloc_pid_bonus(pipex_b->cmdn, pipex_b);
 		pipex_b->infile = open(av[1], O_RDWR);
-		if (pipex_b->infile == -1)
-			ft_error_file_bonus(pipex_b, "Error infile");
 		dup2(pipex_b->infile, STDIN_FILENO);
 		close(pipex_b->infile);
 		*i = 1;
