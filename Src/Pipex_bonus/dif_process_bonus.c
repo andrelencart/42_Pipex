@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 12:54:08 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:54:08 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	is_here_doc(t_pipex_b *pipex_b, char **av)
 {
 	char	*cancer_line;
 
-	alloc_pid_bonus(pipex_b->cmdn - 1, pipex_b);
+	alloc_pid_bonus(pipex_b->cmdn, pipex_b);
 	pipex_b->hdfd = open("here_doc", O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (pipex_b->hdfd == -1)
 		ft_error_file_bonus(pipex_b, "Error Heredoc");
@@ -56,7 +56,7 @@ void	if_here_doc(t_pipex_b *pipex_b, char **av, int ac, int *i)
 		if (pipex_b->outfile == -1)
 			return (ft_error("Error Outfile"));
 		pipex_b->cmdn = ac - 3;
-		alloc_pid_bonus(pipex_b->cmdn - 1, pipex_b);
+		alloc_pid_bonus(pipex_b->cmdn, pipex_b);
 		pipex_b->infile = open(av[1], O_RDWR);
 		if (pipex_b->infile == -1)
 			ft_error_file_bonus(pipex_b, "Error infile");
@@ -96,6 +96,7 @@ void	exec_func(t_pipex_b *pipex_b, char **av, int i)
 	pipex_b->cmds = ft_split_pipe(av[i], ' ');
 	if (!pipex_b->cmds || !pipex_b->cmds[0])
 		ft_error_file_bonus(pipex_b ,"Error Cmds In");
+	dprintf(2 , "command: %s\n", pipex_b->cmds[0]);
 	pipex_b->path = get_path(pipex_b->cmds[0], pipex_b->env, 0);
 	if (!pipex_b->path)
 		ft_error_file_bonus(pipex_b, "Error Path In");
@@ -111,8 +112,10 @@ void	the_output(t_pipex_b *pipex_b, char **av, int i)
 	int	last_pid;
 	
 	last_pid = fork();
-	if (last_pid == -1)
-		ft_error_file_bonus(pipex_b, "Error Last_PID");
+	// if (last_pid == -1)
+	// {
+	// 	ft_error_file_bonus(pipex_b, "Error Last_PID");
+	// }
 	if (last_pid == 0)
 	{
 		dup2(pipex_b->outfile, STDOUT_FILENO);
@@ -120,5 +123,5 @@ void	the_output(t_pipex_b *pipex_b, char **av, int i)
 		exec_func(pipex_b, av, i);
 	}
 	else
-		pipex_b->pid[pipex_b->cmdn] = last_pid;
+		pipex_b->pid[pipex_b->cmdn - 1] = last_pid;
 }

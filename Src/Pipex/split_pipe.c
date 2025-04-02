@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrlencart <andrlencart@student.42.fr>    +#+  +:+       +#+        */
+/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:51:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/03/29 14:55:52 by andrlencart      ###   ########.fr       */
+/*   Updated: 2025/04/02 15:34:20 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ char	**ft_split_pipe(char const *s, char c)
 	int		len;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	split = malloc(sizeof(char *) * (count_str(s, c) + 1));
 	if (!split)
 		return (NULL);
@@ -105,11 +107,10 @@ char	**ft_split_pipe(char const *s, char c)
 		{
 			working_quote(s, &len, c);
 			split[i] = get_word(s, c);
-			if (!split[i])
+			if (!split[i++])
 				return (free_split(split), NULL);
-			i++;
 			s += len;
-		}   
+		}  
 	}
 	split[i] = NULL;
 	return (split);

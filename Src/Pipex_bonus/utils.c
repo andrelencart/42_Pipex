@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:32:05 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/01 17:36:19 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:55:09 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ void	wait_pid_loop(t_pipex_b *pipex_b, int ac)
 {
 	int	i;
 
+	(void)ac;
 	i = 0;
-	while (i < ac - 3)
+	while (i <  pipex_b->cmdn)
 	{
 		waitpid(pipex_b->pid[i], &pipex_b->status, 0);
 		i++;

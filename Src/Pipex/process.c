@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:03 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 14:49:13 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:34:52 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char *get_env(char *search, char **env)
 		i++;
 	if(env[i])
 		return((env[i] + ft_strlen(search)));
-	return("/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin");
+	return (NULL);
 }
 
 char	*get_path(char *cmds, char **env, int i)
@@ -76,7 +76,7 @@ char	*get_path(char *cmds, char **env, int i)
 	
 	path = ft_split_pipe(get_env("PATH=", env), ':');
 	if (!path)
-		ft_error("Error");
+		return (ft_strdup(cmds));
 	i = 0;
 	while (path[i++])
 	{
