@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:32:05 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 18:34:48 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:29:49 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	create_fork(t_pipex_b *pipex_b, int i)
 void	wait_pid_loop(t_pipex_b *pipex_b)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < pipex_b->cmdn)
 	{

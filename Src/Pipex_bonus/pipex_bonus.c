@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:55:58 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 18:42:15 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:18:59 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int ac, char **av, char **env)
 	while (++i < ac - 2)
 		loop_pipes(&pipex_b, av, &i);
 	the_output(&pipex_b, av, i);
+	close(0);
 	master_close();
 	wait_pid_loop(&pipex_b);
 	unlink("here_doc");

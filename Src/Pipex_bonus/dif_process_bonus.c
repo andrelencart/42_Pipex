@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:47:18 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/02 18:23:14 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:24:24 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ void	is_here_doc(t_pipex_b *pipex_b, char **av)
 	pipex_b->hdfd = open("here_doc", O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (pipex_b->hdfd == -1)
 		ft_error_file_bonus(pipex_b, "Error Heredoc");
-	while (1)
+	ft_putstr_fd("> ", 1);
+	cancer_line = get_next_line(0);
+	while (cancer_line)
 	{
-		ft_putstr_fd("> ", 1);
-		cancer_line = get_next_line(0);
 		if (ft_strncmp(av[2], cancer_line, ft_strlen(av[2])) == 0)
 			break ;
 		ft_putstr_fd(cancer_line, pipex_b->hdfd);
 		free(cancer_line);
+		ft_putstr_fd("> ", 1);
+		cancer_line = get_next_line(0);
 	}
 	if (cancer_line)
 		free(cancer_line);
