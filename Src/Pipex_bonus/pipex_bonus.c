@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:55:58 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/03 16:18:59 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:35:39 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av, char **env)
 
 	i = 0;
 	if (ac < 5)
-		ft_error("Error Argument Count");
+		return (master_close(), ft_printf("Wrong Argument Count\n"));
 	ft_bzero((void *)&pipex_b, sizeof(t_pipex));
 	pipex_b.env = env;
 	if_here_doc(&pipex_b, av, ac, &i);

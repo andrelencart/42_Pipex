@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:32:05 by andcarva          #+#    #+#             */
-/*   Updated: 2025/04/03 18:29:49 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:35:57 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	alloc_pid_bonus(int size, t_pipex_b *pipex_b)
 {
 	pipex_b->pid = ft_calloc(size, sizeof(int));
 	if (!pipex_b->pid)
-		ft_error("Error Pid Alloc");
+		ft_error("Error Pipex");
 }
 
 void	ft_error_file_bonus(t_pipex_b *pipex_b, char *s)
@@ -55,7 +55,7 @@ void	create_fork(t_pipex_b *pipex_b, int i)
 {
 	pipex_b->pid[i] = fork();
 	if (pipex_b->pid[i] < 0)
-		ft_error("Error Pid");
+		ft_error("Error Pipex");
 }
 
 void	wait_pid_loop(t_pipex_b *pipex_b)
